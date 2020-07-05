@@ -12,7 +12,8 @@ class PhoneBook:
         print(f"Список контактов телефонной книги <{self.book_name}>")
         print()
         for person in self.contacts:
-            person.print_entree()
+            # person.print_entree()
+            print(person)
             print()
 
     def contact_delete(self, phone_number_delete):
@@ -30,7 +31,8 @@ class PhoneBook:
     def search_for_names(self, first_name_entree, second_name_entree):
         for person in self.contacts:
             if person.first_name == first_name_entree and person.second_name == second_name_entree:
-                person.print_entree()
+                # person.print_entree()
+                print(person)
 
 
 class Contact:
@@ -42,18 +44,35 @@ class Contact:
         self.args = args
         self.kwargs = kwargs
 
-    def print_entree(self):
-        print("Имя: " + self.first_name)
-        print("Фамилия: " + self.second_name)
-        print("Телефон: " + self.phone_number)
-        print("Дополнительная информация: ")
+    def __str__(self):
         if self.favorite:
-            print("   В избранных: да")
+            fav = "В избранных: да"
         else:
-            print("   В избранных: нет")
-        # print(self.args)
+            fav = "В избранных: нет"
+        additional_print = ""
         for additional_items in self.kwargs:
-            print("   " + str(additional_items) + " : " + str(self.kwargs[additional_items]))
+            additional_print = additional_print + str(additional_items) + ": " + str(self.kwargs[additional_items]) + "\n"
+
+        return f'''Имя:  {self.first_name}
+Фамилия:  {self.second_name}
+Телефон:  {self.phone_number}
+Дополнительная информация:
+{fav}
+{additional_print}
+    '''
+
+    # def print_entree(self):
+    #     print("Имя: " + self.first_name)
+    #     print("Фамилия: " + self.second_name)
+    #     print("Телефон: " + self.phone_number)
+    #     print("Дополнительная информация: ")
+    #     if self.favorite:
+    #         print("   В избранных: да")
+    #     else:
+    #         print("   В избранных: нет")
+    #     # print(self.args)
+    #     for additional_items in self.kwargs:
+    #         print("   " + str(additional_items) + " : " + str(self.kwargs[additional_items]))
 
 
 john = Contact("Вася", "Smith", "5555")
